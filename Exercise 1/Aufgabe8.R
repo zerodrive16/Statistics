@@ -19,3 +19,6 @@ list_xy2
 
 # Access the concatenated list to create directly a list containing for every
 # child name and age
+children <- list(child1 = c(list_xy[[4]], list_xy[[3]][1]),
+                 child2 = c(list_xy[[5]], list_xy[[3]][2]), 
+                 child3 = c(list_xy[[6]], list_xy[[3]][3]))
