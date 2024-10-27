@@ -49,21 +49,3 @@ student3_tidy <- tibble(name= c("Adam", "Bernd", "Christian", "Doris"),
                         height = c(1.83, 1.75, 1.69, 1.57), 
                         weight = c(81, 71, 55, 62)
                         )
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-rm("student1_tidy")

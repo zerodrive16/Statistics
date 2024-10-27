@@ -6,8 +6,6 @@ df <- tibble(id = 1:10, sex = sample(x = c("f", "m"), size = 10, replace = TRUE)
              age = round(runif(10, 20, 35)), 
              score1 = round(runif(10, 0, 25))
              )
-df
-
 
 # Select the data of all male students
 df_males <- df %>% filter(sex == "m")
@@ -40,4 +38,5 @@ df %>% group_by(sex) %>% summarize(mean_scores = mean(total_score),
                                    median_scores = median(total_score)
                                    )
 
-rm("df_addRow")
+df
+
