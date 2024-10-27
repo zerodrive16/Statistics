@@ -32,6 +32,12 @@ df <- df %>% mutate(grade = case_when(
                     total_score > 65 ~ 1
                     ))
 
+df %>% select(id, sex, grade) %>% filter(grade > 5) %>% arrange(sex)
 
+df %>% group_by(sex) %>% summarize(mean_scores = mean(total_score), 
+                                   minimum_scores = min(total_score), 
+                                   maximum_scores = max(total_score), 
+                                   median_scores = median(total_score)
+                                   )
 
 rm("df_addRow")
