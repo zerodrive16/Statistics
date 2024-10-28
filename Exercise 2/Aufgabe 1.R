@@ -34,7 +34,6 @@ student3 <- tibble(name = c("Adam", "Bernd", "Christian", "Doris"),
 # The datasets violate these rules
 
 # (c) Make a tidy version of all datasets
-
 student1_tidy <- tibble(student = rep(c("Adam", "Bernd", "Christian", "Doris"), each = 3), 
                         subject = rep(c("Algebra", "Analysis", "Diskrete.math"), 4), 
                         grades = c(NA, 2, 3, 5, NA, NA, 3, 1, 2, 4, 3, 4)
@@ -49,3 +48,15 @@ student3_tidy <- tibble(name= c("Adam", "Bernd", "Christian", "Doris"),
                         height = c(1.83, 1.75, 1.69, 1.57), 
                         weight = c(81, 71, 55, 62)
                         )
+
+# Another way for tidy version
+student1 %>% gather("algebra","analysis", "diskrete.math", 
+                    key = "exam", value = "grade")
+
+student2 %>% spread(key = type, value = measure)
+
+student3 %>% separate(col = ratio, into = c("weight", "height"), sep = "/") %>% 
+                      mutate(ratio = as.double(height) / as.double(weight)) %>% 
+                      select(ratio) %>% round(2)
+        
+  
