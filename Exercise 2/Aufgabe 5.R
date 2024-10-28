@@ -84,6 +84,11 @@ flight %>% filter(!is.na(arr_delay)) %>%
   unique() %>%
   arrange(month)
 
+# (k) Find a table with the number of cancelled flights (dep delay =
+# NA), the number of flights with no dep delay ( —dep delay—
+# ≤ ± 5 minutes and the means of dep delay, arr delay per month
+# and day.
+
 
 # (l)  Determine a table that shows, for each airline (carrier), the flight
 # connection given by the airports of dest und origin that occurred
