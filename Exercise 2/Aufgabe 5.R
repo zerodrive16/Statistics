@@ -53,7 +53,7 @@ flights <- flight %>% mutate(
 # (i) Find a list of carriers with a column ratio which denotes the number of flights
 # with arr_delay less than 10 minutes to the total number of flights. The list 
 # should be sorted by ratio
-flights %>% filter(!is.na(arr_delay)) %>% # Ignore flights that are unknown
+flight %>% filter(!is.na(arr_delay)) %>% # Ignore flights that are unknown
   mutate(bool_del = if_else(arr_delay < 10, 1, 0)) %>% # New Col flights on time
   group_by(carrier) %>% # group data by carrier to do the calculations
   mutate(
@@ -71,7 +71,18 @@ flights %>% filter(!is.na(arr_delay)) %>% # Ignore flights that are unknown
 # 10 minutes to the total number of flights. The list should have
 # the columns month, carrier, number of flights of the carrier in that
 # month and ratio.
-
+flight %>% filter(!is.na(arr_delay)) %>% 
+  mutate(bool_del = if_else(arr_delay < 10, 1, 0)) %>% 
+  group_by(month, carrier) %>%
+  mutate(
+    nof = n(),
+    ndel = sum(bool_del), 
+    del_ratio = ndel / nof
+  ) %>%
+  select(month, carrier, nof, ndel, del_ratio) %>%
+  group_by(month) %>% filter(del_ratio == max(del_ratio)) %>%
+  unique() %>%
+  arrange(month)
 
 
 # (l)  Determine a table that shows, for each airline (carrier), the flight
