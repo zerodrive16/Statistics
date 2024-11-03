@@ -88,7 +88,26 @@ flight %>% filter(!is.na(arr_delay)) %>%
 # NA), the number of flights with no dep delay ( —dep delay—
 # ≤ ± 5 minutes and the means of dep delay, arr delay per month
 # and day.
-
+# cancelled flights
+canc_flights <- flights %>% 
+  filter(is.na(dep_delay)) %>% 
+  group_by(month, day) %>% 
+  summarise(nof_canc = n())
+# no delay flights
+no_delay <- flights %>% 
+  filter(!is.na(dep_delay) & dep_delay >= -5 & dep_delay <= 5) %>% 
+  group_by(month, day) %>% 
+  summarise(nof_no_delay = n())
+# calculate average
+avg_delays <- flights %>% 
+  group_by(month, day) %>% 
+  summarise(
+    mean_dep_del = mean(dep_delay, na.rm = TRUE), 
+    mean_arr_del = mean(arr_delay, na.rm = TRUE)
+  )
+# join into table
+table <- full_join(canc_flights, no_delay, by = c("month", "day")) %>%
+  full_join(avg_delays, by = c("month", "day"))
 
 # (l)  Determine a table that shows, for each airline (carrier), the flight
 # connection given by the airports of dest und origin that occurred
