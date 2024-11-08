@@ -31,7 +31,9 @@ plot.ecdf(data, xlab = "time", ylab = "Fn(x)")
 
 # (c)
 bounds <- c(500, 600, 700, 800, 900, 1000, 1100)
-cut(data, breaks = bounds)
+# Takes them into intervals so (500,600], (600,700]
+cut(data, breaks = bounds) 
+# Removing the 500 bounds since the values are not inside there
 times_cut <- cut(data, breaks = bounds, labels = bounds[-1])
 times_cut
 hist(as.integer(times_cut))
